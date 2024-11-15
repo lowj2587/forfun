@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favicon Color Switcher</title>
+    <link id="favicon" rel="icon" href="red.ico" type="image/x-icon">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="toggleButton" onclick="toggleFavicon()">Switch Favicon</button>
+
+    <script>
+        let isRed = true; // Track the current state
+
+        function toggleFavicon() {
+            const favicon = document.getElementById('favicon');
+            if (isRed) {
+                favicon.href = 'green.ico'; // Switch to green
+            } else {
+                favicon.href = 'red.ico'; // Switch back to red
+            }
+            isRed = !isRed; // Toggle the state
+        }
+    </script>
+</body>
+</html>
