@@ -25,17 +25,37 @@
     <button id="toggleButton" onclick="toggleFavicon()">Switch Favicon</button>
 
     <script>
-        let isRed = true; // Track the current state
-
+        // Function to toggle the favicon
         function toggleFavicon() {
             const favicon = document.getElementById('favicon');
-            if (isRed) {
-                favicon.href = 'green.ico'; // Switch to green
-            } else {
-                favicon.href = 'red.ico'; // Switch back to red
-            }
-            isRed = !isRed; // Toggle the state
+            const currentFavicon = favicon.href.includes('red.ico') ? 'red.ico' : 'green.ico';
+            const newFavicon = currentFavicon === 'red.ico' ? 'green.ico' : 'red.ico';
+
+            // Update the favicon for the current user
+            favicon.href = newFavicon;
+
+            // Store the new favicon in local storage
+            localStorage.setItem('favicon', newFavicon);
         }
+
+        // Function to update the favicon based on local storage
+        function updateFaviconFromStorage() {
+            const storedFavicon = localStorage.getItem('favicon');
+            if (storedFavicon) {
+                document.getElementById('favicon').href = storedFavicon;
+            }
+        }
+
+        // Check local storage on page load
+        window.onload = updateFaviconFromStorage;
+
+        // Poll for favicon changes every second
+        setInterval(() => {
+            const storedFavicon = localStorage.getItem('favicon');
+            if (storedFavicon) {
+                document.getElementById('favicon').href = storedFavicon;
+            }
+        }, 1000);
     </script>
 </body>
 </html>
